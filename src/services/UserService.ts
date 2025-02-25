@@ -1,6 +1,6 @@
 import axios from "axios";
 import {getToken, Token} from "../utils/jwt";
-import { setCooke } from "../utils/cookie";
+import { removeCookie, setCooke } from "../utils/cookie";
 
 export interface IUserBasicInfo {
     id:number;
@@ -42,6 +42,12 @@ class UserService {
         const token = new Token(response.data.token);
 
         setCooke("t", token.toString(), token.exp);
+
+        return true;
+    }
+
+    public async logout(): Promise<boolean> {
+        removeCookie("t");
 
         return true;
     }

@@ -2,7 +2,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import LoginView from "./views/LoginView.tsx";
 import {ReactNode} from "react";
 import UserService from "./services/UserService.ts";
-import DashboardView from "./views/DashboardView.tsx";
+import MainView from "./views/MainView.tsx";
 
 function AuthenticatedPath(props: { children: ReactNode }) {
     return UserService.isAuthenticated() ? props.children :
@@ -16,7 +16,7 @@ function App() {
                     path="/"
                     element={
                         <AuthenticatedPath>
-                            <DashboardView/>
+                            <MainView/>
                         </AuthenticatedPath>
                     }
                 />

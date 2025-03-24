@@ -22,13 +22,13 @@ function LoginView() {
     const [password, setPassword] = useState<string>("");
     const [isFetching, setIsFetching] = useState<boolean>(false);
     const [authFailure, setAuthFailure] = useState<boolean>(false);
-    
+
     useEffect(() => {
         if (UserService.isAuthenticated()) {
             navigate("/");
-        }    
+        }
     }, [navigate])
-    
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -52,7 +52,7 @@ function LoginView() {
     return <Container
         sx={{
             width: '100vw',
-            height: '80vh',
+            height: '100vh',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'

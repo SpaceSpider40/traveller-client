@@ -14,6 +14,8 @@ export interface IUserBasicInfo {
 class UserService {
     static #instance: UserService;
 
+    private loggedUser?: IUserBasicInfo;
+
     private client = axios.create({
         baseURL: "/api/v1/",
     });
@@ -48,12 +50,14 @@ class UserService {
 
     public async logout(): Promise<boolean> {
         removeCookie("t");
+        this.loggedUser = undefined;
 
         return true;
     }
 
     public async getBasicInfo(): Promise<IUserBasicInfo> {
         if (!UserService.isAuthenticated()) throw new Error("Unauthorized");
+        if (this.loggedUser) return this.loggedUser;
 
         const token = getToken();
 
@@ -69,7 +73,7 @@ class UserService {
 
         const data = response.data;
 
-        return {
+        this.loggedUser = {
             id: data.id,
             firstName: data.firstName,
             lastName: data.lastName,
@@ -77,6 +81,8 @@ class UserService {
             username: data.username,
             email: data.email,
         };
+
+        return this.loggedUser;
     }
 }
 

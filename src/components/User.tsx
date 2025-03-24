@@ -35,11 +35,11 @@ function User() {
             });
     }, []);
 
-    useEffect(() => {
+    // useEffect(() => {
         if (!UserService.isAuthenticated()) {
             navigate("/login");
         }
-    })
+    // })
 
     return (
         <Stack
